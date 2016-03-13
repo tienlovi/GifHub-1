@@ -4,7 +4,11 @@ A Chrome extension that adds a button on GitHub comment toolbars, allowing you t
 
 ![screenshot](screenshot.gif)
 
-# How to install
+# Install
+
+- [Chrome](https://chrome.google.com/webstore/detail/gifhub/lponagpckglibniamicamklhfkoebpeb/)
+
+# Installing for Development
 
 1. Clone the repository
 2. Run `npm install` in the root of the project
