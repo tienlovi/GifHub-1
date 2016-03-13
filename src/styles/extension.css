@@ -22,7 +22,17 @@
     display: none;
 }
 
+.giphy-widget input {
+    margin: 2%;
+}
+
 .giphy-widget li {
     list-style: none;
     display: inline;
+}
+
+.giphy-widget li img{
+    cursor: pointer;
+    width: 125px;
+    height: 100px;
 }

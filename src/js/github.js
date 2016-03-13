@@ -1,11 +1,4 @@
-function getAuthenticityToken() {
-    return $('input[name="authenticity_token"]').val();
-}
-
-function getPreviewUri() {
-    return $('.js-previewable-comment-form')
-        .attr('data-preview-url');
-}
+import { getAuthenticityToken, getPreviewUri } from './gh-page';
 
 function getMarkdownPreview(text) {
     // Upgrade jQuery deferred to an ES6 Promise

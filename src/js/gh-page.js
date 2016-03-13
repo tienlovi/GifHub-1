@@ -22,3 +22,12 @@ export function onGiphyBtnClick(cb) {
         })
     ));
 }
+
+export function getAuthenticityToken() {
+    return $('input[name="authenticity_token"]').val();
+}
+
+export function getPreviewUri() {
+    return $('.js-previewable-comment-form')
+        .attr('data-preview-url');
+}

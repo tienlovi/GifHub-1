@@ -3,12 +3,14 @@ import {
     addBtnToToolbars,
     onPartialRender,
     onGiphyBtnClick
-} from './dom';
+} from './gh-page';
 
 addBtnToToolbars();
 onPartialRender(addBtnToToolbars);
 
-const giphyWidget = widget.create().appendToDOM();
+const giphyWidget = widget.create({
+    onSelection: console.log.bind(console)
+}).appendToDOM();
 
 onGiphyBtnClick(({ form, button, input }) => {
     const { top, left } = $(button).offset();
