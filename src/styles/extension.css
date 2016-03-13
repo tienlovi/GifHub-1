@@ -5,8 +5,8 @@
 
 .giphy-widget {
     display: inline-block;
-    width: 400px;
-    height: 300px;
+    width: 272px;
+    height: 254px;
     text-align: center;
     position: absolute;
     background-color: #fff;
@@ -14,13 +14,16 @@
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-    z-index: 1000;
-    overflow: scroll;
+    z-index: 100;
 }
 
 .js-giphy-loading {
     display: block;
     margin: 10% auto;
+}
+
+.giphy-widget li img:hover {
+    outline: 1px solid #43908C;
 }
 
 .giphy-widget-hidden {
@@ -29,6 +32,12 @@
 
 .giphy-widget input {
     margin: 2%;
+    width: 95%;
+}
+
+.giphy-widget ul {
+    height: 80%;
+    overflow: scroll;
 }
 
 .giphy-widget li {
@@ -40,4 +49,30 @@
     cursor: pointer;
     width: 125px;
     height: 100px;
+}
+
+.giphy-widget:before {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    border: 8px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.15);
+    top: -16px;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.giphy-widget:after {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    border: 7px solid transparent;
+    border-bottom-color: #fff;
+    top: -14px;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.giphy-widget li:nth-child(odd) {
+    margin-right: 2%;
 }

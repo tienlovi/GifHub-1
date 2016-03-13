@@ -17,7 +17,7 @@ onGiphyBtnClick(({ form, button, input }) => {
             insertTextAtCursor(textarea, toMarkdownImage(data));
         },
         onDispose: () => giphyWidget = null
-    }).appendToDOM().showAt(top, left);
+    }).appendToDOM().showAt(top + 28, left - 124);
 });
 
 function toMarkdownImage({ uri, name }) {
