@@ -12,11 +12,12 @@ export default {
         return Object.create(this).init(...args);
     },
 
-    init(opts = {}) {
+    init({ onSelection, onDispose }) {
         const $widget = this.$widget = $(widgetTemplate);
         this.$input = $widget.find('input');
         this.$imgList = $widget.find('.js-gif-list');
-        this.onSelection = opts.onSelection;
+        this.onSelection = onSelection;
+        this.onDispose = onDispose;
         return this.setupListeners();
     },
 
@@ -43,8 +44,10 @@ export default {
     },
 
     onImageData(data) {
+        if (this.disposed) return;
+
         const images = data.res.data.map(image => ({
-            uri: image.images.fixed_width_small.url,
+            uri: image.images.original.url,
             name: image.slug
         }));
 
@@ -58,24 +61,21 @@ export default {
             uri: img.src,
             name: img.title
         });
-    },
-
-    hide() {
-        this.$widget.addClass(hiddenClass);
-        this.reset();
-        return this;
+        this.dispose();
     },
 
     showAt(top = 0, left = 0) {
-        this.reset();
         this.$widget.removeClass(hiddenClass).css({ top, left });
         return this;
     },
 
-    reset() {
-        this.$imgList.empty();
-        this.$input.val('');
-        return this;
+    dispose() {
+        this.$widget.remove();
+        this.$widget = null;
+        this.$input = null;
+        this.$imgList = null;
+        this.disposed = true;
+        this.onDispose();
     },
 
     updateImageList(images = []) {
