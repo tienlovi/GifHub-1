@@ -1,4 +1,5 @@
 import debounce from 'lodash.debounce';
+import { bypassCSPForImages } from './github';
 
 // brfs doesn't work with ES6 import syntax
 // https://github.com/substack/brfs/issues/39
@@ -15,7 +16,7 @@ export default {
         const $widget = this.$widget = $(widgetTemplate);
         this.$input = $widget.find('input');
         this.$imgList = $widget.find('.js-gif-list');
-        return this.setupListener();
+        return this.setupListeners();
     },
 
     appendToDOM(selector = 'body') {
@@ -23,7 +24,7 @@ export default {
         return this;
     },
 
-    setupListener() {
+    setupListeners() {
         this.$input.on('keydown change', debounce(e => {
             window.postMessage({
                 giphySearch: true,
@@ -31,10 +32,17 @@ export default {
             }, '*');
         }, 1200));
 
-        window.addEventListener('message', msg => {
-            if (!(msg.data && msg.data.giphyResponse)) return;
+        window.addEventListener('message', ({ data }) => {
+            if (!(data && data.giphyResponse)) return;
 
-            this.updateImageList(msg.data.res.data);
+            const images = data.res.data.map(image => ({
+                uri: image.images.fixed_width_small.url,
+                name: image.slug
+            }));
+
+            bypassCSPForImages(images)
+                .then(imgList => this.updateImageList(imgList))
+                .catch(err => console.error(err));
         });
         return this;
     },
@@ -51,9 +59,7 @@ export default {
 
     updateImageList(images = []) {
         const imageDOM = images.map(image => {
-            const name = image.slug;
-            const uri = image.images.fixed_width_small.url;
-            return `<li><img src="${uri}" title="${name}"</li>`;
+            return `<li><img src="${image.uri}" title="${image.name}"</li>`;
         }).join('');
 
         this.$imgList.html(imageDOM);

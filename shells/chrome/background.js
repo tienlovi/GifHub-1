@@ -10,5 +10,6 @@ function giphySearch(searchTerm) {
 
 chrome.runtime.onMessage.addListener((data, sender, cb) => {
     giphySearch(data.query).then(cb);
+    // return true to indicate async response to page
     return true;
 });

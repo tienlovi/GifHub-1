@@ -15,8 +15,14 @@
     border-radius: 4px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     z-index: 1000;
+    overflow: scroll;
 }
 
 .giphy-widget-hidden {
     display: none;
+}
+
+.giphy-widget li {
+    list-style: none;
+    display: inline;
 }
