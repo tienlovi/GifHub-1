@@ -42,6 +42,11 @@ export default {
             if (data && data.giphyResponse) this.onImageData(data);
         });
 
+        $(document).on('click.giphy', e => {
+            if (this.$widget.get(0).contains(e.target)) return;
+            this.dispose();
+        });
+
         return this;
     },
 
@@ -73,10 +78,8 @@ export default {
     },
 
     dispose() {
+        $(document).off('click.giphy');
         this.$widget.remove();
-        this.$widget = null;
-        this.$input = null;
-        this.$imgList = null;
         this.disposed = true;
         this.onDispose();
     },
