@@ -1,0 +1,21 @@
+.giphy-btn {
+    content: url('data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjE2IiB3aWR0aD0iMTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZD0iTTYgNWgydjJINlY1eiBtNi0wLjV2OS41YzAgMC41NS0wLjQ1IDEtMSAxSDFjLTAuNTUgMC0xLTAuNDUtMS0xVjJjMC0wLjU1IDAuNDUtMSAxLTFoNy41bDMuNSAzLjV6IG0tMSAwLjVMOCAySDF2MTFsMy01IDIgNCAyLTIgMyAzVjV6IiAvPgo8L3N2Zz4K');
+    color: #767676;
+}
+
+.giphy-widget {
+    display: inline-block;
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    position: absolute;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+
+.giphy-widget-hidden {
+    display: none;
+}

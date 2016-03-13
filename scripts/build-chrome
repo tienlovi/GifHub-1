@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CHROME_SHELL="shells/chrome"
+CHROME_DIST="dist/chrome"
+BUNDLE="./scripts/bundle-js"
+STYLES="./scripts/styles"
+
+rm -rf $CHROME_DIST && mkdir -p $CHROME_DIST
+$BUNDLE $CHROME_DIST/bundle.js
+cp $CHROME_SHELL/* $CHROME_DIST
+$STYLES > $CHROME_DIST/extension.css

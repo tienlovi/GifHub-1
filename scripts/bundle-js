@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BROWSERIFY="./node_modules/.bin/browserify"
+BUNDLE_ENTRY="src/js/index.js"
+
+$BROWSERIFY -t babelify -t brfs $BUNDLE_ENTRY -o $1
