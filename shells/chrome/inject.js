@@ -1,10 +1,24 @@
 'use strict';
 
 window.addEventListener('message', msg => {
-    if (!msg.data || !msg.data.installGiphy) return;
+    if (!(msg.data && msg.data.installGiphy)) return;
 
     injectCSSFile('extension.css');
     injectJSFile('bundle.js');
+});
+
+window.addEventListener('message', msg => {
+    if (!(msg.data && msg.data.giphySearch)) return;
+
+    chrome.runtime.sendMessage({
+        giphySearch: true,
+        query: msg.data.query
+    }, res => {
+        window.postMessage({
+            giphyResponse: true,
+            res: res
+        }, '*');
+    });
 });
 
 function messageIfFound(window) {

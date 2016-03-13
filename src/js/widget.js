@@ -1,5 +1,4 @@
 import debounce from 'lodash.debounce';
-import { giphySearch } from './giphy';
 
 // brfs doesn't work with ES6 import syntax
 // https://github.com/substack/brfs/issues/39
@@ -26,12 +25,17 @@ export default {
 
     setupListener() {
         this.$input.on('keydown change', debounce(e => {
-            giphySearch(e.currentTarget.value).then(res => {
-                this.updateImageList(res.data);
-            }).catch(err => {
-                console.error('Failed called Giphy', err);
-            });
+            window.postMessage({
+                giphySearch: true,
+                query: e.currentTarget.value
+            }, '*');
         }, 1200));
+
+        window.addEventListener('message', msg => {
+            if (!(msg.data && msg.data.giphyResponse)) return;
+
+            this.updateImageList(msg.data.res.data);
+        });
         return this;
     },
 

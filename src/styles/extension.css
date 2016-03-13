@@ -14,6 +14,7 @@
     border: 1px solid rgba(0,0,0,0.15);
     border-radius: 4px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
 }
 
 .giphy-widget-hidden {

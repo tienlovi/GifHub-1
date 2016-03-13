@@ -11,5 +11,12 @@
     "web_accessible_resources": [
         "bundle.js",
         "extension.css"
-    ]
+    ],
+    "permissions": [
+        "https://api.giphy.com/v1/*"
+    ],
+    "background": {
+        "scripts": ["background.js"],
+        "peristent": false
+    }
 }
