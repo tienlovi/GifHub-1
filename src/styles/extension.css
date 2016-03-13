@@ -18,6 +18,11 @@
     overflow: scroll;
 }
 
+.js-giphy-loading {
+    display: block;
+    margin: 10% auto;
+}
+
 .giphy-widget-hidden {
     display: none;
 }

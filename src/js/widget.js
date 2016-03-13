@@ -27,12 +27,14 @@ export default {
     },
 
     setupListeners() {
-        this.$input.on('keydown change', debounce(e => {
+        this.$input.on('keydown', debounce(e => {
+            this.$imgList.empty();
+            this.toggleLoading(true);
             window.postMessage({
                 giphySearch: true,
                 query: e.currentTarget.value
             }, '*');
-        }, 1200));
+        }, 1000));
 
         this.$widget.on('click', 'img', e => this.imageSelected(e.currentTarget));
 
@@ -46,6 +48,7 @@ export default {
     onImageData(data) {
         if (this.disposed) return;
 
+        this.toggleLoading(false);
         const images = data.res.data.map(image => ({
             uri: image.images.original.url,
             name: image.slug
@@ -76,6 +79,11 @@ export default {
         this.$imgList = null;
         this.disposed = true;
         this.onDispose();
+    },
+
+    toggleLoading(show) {
+        const action = show ? 'removeClass' : 'addClass';
+        this.$widget.find('.js-giphy-loading')[action](hiddenClass);
     },
 
     updateImageList(images = []) {
