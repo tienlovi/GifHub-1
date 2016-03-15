@@ -8,7 +8,8 @@
     "copy:chrome": "cp shells/chrome/* dist/chrome && npm run styles dist/chrome/extension.css",
     "bundle:chrome": "npm run bundle dist/chrome/bundle.js",
     "styles": "cat src/styles/* > ",
-    "bundle": "browserify -t babelify -t brfs src/js/index.js -o "
+    "bundle": "browserify -t babelify -t brfs src/js/index.js -o ",
+    "package:chrome": "npm run build:chrome && zip -r chrome.zip dist/chrome/*"
   },
   "author": "Andrew Levine",
   "devDependencies": {
