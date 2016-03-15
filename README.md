@@ -12,7 +12,7 @@ A Chrome extension that adds a button on GitHub comment toolbars, allowing you t
 
 1. Clone the repository
 2. Run `npm install` in the root of the project
-3. Run `npm run build-chrome`
+3. Run `npm run build:chrome`
 4. Visit the [extensions page](chrome://extensions) in Chrome
 5. Enable the `Developer Mode` checkbox
 6. Click `Load unpacked extension`
