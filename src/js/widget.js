@@ -53,15 +53,21 @@ export default {
     onImageData(data) {
         if (this.disposed) return;
 
-        this.toggleLoading(false);
         const images = data.res.data.map(image => ({
             uri: image.images.original.url,
             name: image.slug
         }));
 
         bypassCSPForImages(images)
-            .then(imgList => this.updateImageList(imgList))
-            .catch(err => console.error(err));
+            .then(imgList => {
+                this.toggleLoading(false);
+                this.updateImageList(imgList);
+            }).catch(err => {
+                console.error(err);
+                this.toggleLoading(false);
+            });
+
+        return this;
     },
 
     imageSelected(img) {
