@@ -1,6 +1,6 @@
 {
   "name": "octo-preview",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Insert Giphy GIFs in GitHub comments",
   "scripts": {
     "build:chrome": "npm-run-all clean:chrome --parallel copy:chrome bundle:chrome",

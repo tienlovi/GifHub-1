@@ -17,7 +17,22 @@
     z-index: 100;
 }
 
-.js-giphy-loading {
+.giphy-content {
+    position: relative;
+    height: 80%;
+}
+
+.giphy-message {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    font-weight: 600;
+    font-size: 1.7em;
+    margin: 0 auto;
+    width: 81%;
+}
+
+.giphy-loading {
     display: block;
     margin: 10% auto;
 }
@@ -26,17 +41,18 @@
     outline: 1px solid #43908C;
 }
 
-.giphy-widget-hidden {
+.giphy-hidden {
     display: none;
 }
 
 .giphy-widget input {
     margin: 2%;
     width: 95%;
+    height: 13%;
 }
 
 .giphy-widget ul {
-    height: 80%;
+    height: 100%;
     overflow: scroll;
 }
 

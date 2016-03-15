@@ -5,7 +5,8 @@ import { bypassCSPForImages } from './github';
 // https://github.com/substack/brfs/issues/39
 const fs = require('fs');
 const widgetTemplate = fs.readFileSync('src/giphy-widget.html', 'utf8');
-const hiddenClass = 'giphy-widget-hidden';
+const hiddenClass = 'giphy-hidden';
+const noResultsMsg = 'No GIFs Found :(';
 
 export default {
     create(...args) {
@@ -16,6 +17,7 @@ export default {
         const $widget = this.$widget = $(widgetTemplate);
         this.$input = $widget.find('input');
         this.$imgList = $widget.find('.js-gif-list');
+        this.$message = $widget.find('.js-giphy-message');
         this.onSelection = onSelection;
         this.onDispose = onDispose;
         return this.setupListeners();
@@ -28,8 +30,7 @@ export default {
 
     setupListeners() {
         this.$input.on('keydown', debounce(e => {
-            this.$imgList.empty();
-            this.toggleLoading(true);
+            this.onSearchStart();
             window.postMessage({
                 giphySearch: true,
                 query: e.currentTarget.value
@@ -38,6 +39,7 @@ export default {
 
         this.$widget.on('click', 'img', e => this.imageSelected(e.currentTarget));
 
+        // TODO: Cleanup event handler on dispose()
         window.addEventListener('message', ({ data }) => {
             if (data && data.giphyResponse) this.onImageData(data);
         });
@@ -50,10 +52,21 @@ export default {
         return this;
     },
 
-    onImageData(data) {
-        if (this.disposed) return;
+    onSearchStart() {
+        this.$imgList.empty();
+        this.toggleLoading(true);
+        this.toggleMessage(false);
+    },
 
-        const images = data.res.data.map(image => ({
+    onImageData({ res: { data } }) {
+        if (this.disposed) return;
+        if (!data.length) {
+            this.toggleLoading(false);
+            this.toggleMessage(true, noResultsMsg);
+            return this;
+        }
+
+        const images = data.map(image => ({
             uri: image.images.original.url,
             name: image.slug
         }));
@@ -87,12 +100,17 @@ export default {
         $(document).off('click.giphy');
         this.$widget.remove();
         this.disposed = true;
-        this.onDispose();
+        this.onDispose && this.onDispose();
     },
 
     toggleLoading(show) {
         const action = show ? 'removeClass' : 'addClass';
         this.$widget.find('.js-giphy-loading')[action](hiddenClass);
+    },
+
+    toggleMessage(show, message) {
+        this.$message.text(message)[show ? 'removeClass' : 'addClass'](hiddenClass);
+        return this;
     },
 
     updateImageList(images = []) {
