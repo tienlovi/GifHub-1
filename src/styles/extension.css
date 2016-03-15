@@ -5,7 +5,7 @@
 
 .giphy-widget {
     display: inline-block;
-    width: 272px;
+    width: 280px;
     height: 254px;
     text-align: center;
     position: absolute;
@@ -20,6 +20,8 @@
 .giphy-content {
     position: relative;
     height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .giphy-message {
@@ -49,11 +51,6 @@
     margin: 2%;
     width: 95%;
     height: 13%;
-}
-
-.giphy-widget ul {
-    height: 100%;
-    overflow: scroll;
 }
 
 .giphy-widget li {
