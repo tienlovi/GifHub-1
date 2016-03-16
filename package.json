@@ -3,13 +3,7 @@
   "version": "1.0.2",
   "description": "Insert Giphy GIFs in GitHub comments",
   "scripts": {
-    "build:chrome": "npm-run-all clean:chrome --parallel copy:chrome bundle:chrome",
-    "clean:chrome": "rm -rf dist/chrome && mkdir -p dist/chrome",
-    "copy:chrome": "cp shells/chrome/* dist/chrome && npm run styles dist/chrome/extension.css",
-    "bundle:chrome": "npm run bundle:github dist/chrome/bundle.js",
-    "styles": "cat src/styles/* > ",
-    "package:chrome": "npm run build:chrome && zip -r chrome.zip dist/chrome/*",
-    "bundle:github": "browserify -t babelify -t brfs src/js/sites/GitHub/index.js -o "
+    "build:chrome": "gulp"
   },
   "author": "Andrew Levine",
   "devDependencies": {
@@ -18,7 +12,13 @@
     "babelify": "^7.2.0",
     "brfs": "^1.4.3",
     "browserify": "^11.2.0",
-    "npm-run-all": "^1.5.3"
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "npm-run-all": "^1.5.3",
+    "require-dir": "^0.3.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.3"
