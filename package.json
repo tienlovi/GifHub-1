@@ -6,10 +6,10 @@
     "build:chrome": "npm-run-all clean:chrome --parallel copy:chrome bundle:chrome",
     "clean:chrome": "rm -rf dist/chrome && mkdir -p dist/chrome",
     "copy:chrome": "cp shells/chrome/* dist/chrome && npm run styles dist/chrome/extension.css",
-    "bundle:chrome": "npm run bundle dist/chrome/bundle.js",
+    "bundle:chrome": "npm run bundle:github dist/chrome/bundle.js",
     "styles": "cat src/styles/* > ",
-    "bundle": "browserify -t babelify -t brfs src/js/index.js -o ",
-    "package:chrome": "npm run build:chrome && zip -r chrome.zip dist/chrome/*"
+    "package:chrome": "npm run build:chrome && zip -r chrome.zip dist/chrome/*",
+    "bundle:github": "browserify -t babelify -t brfs src/js/sites/GitHub/index.js -o "
   },
   "author": "Andrew Levine",
   "devDependencies": {

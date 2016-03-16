@@ -1,4 +1,4 @@
-import { getAuthenticityToken, getPreviewUri } from './gh-page';
+import { getAuthenticityToken, getPreviewUri } from './page';
 
 function getMarkdownPreview(text) {
     // Upgrade jQuery deferred to an ES6 Promise
