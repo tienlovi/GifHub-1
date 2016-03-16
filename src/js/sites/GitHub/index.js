@@ -5,6 +5,7 @@ import {
     insertTextAtCursor
 } from './page';
 import widget from '../../widget';
+import { startSearch, listenForGiphyResponse } from '../../events';
 import { toMarkdownImage } from '../../utils';
 import { bypassCSPForImages } from './api';
 import debounce from 'lodash.debounce';
@@ -18,27 +19,15 @@ onGiphyBtnClick(({ form, button, input }) => {
         insertTextAtCursor(textarea, toMarkdownImage(data));
     };
 
-    const onTextChange = function onTextChange(text) {
-        window.postMessage({
-            giphySearch: true,
-            query: text
-        }, '*');
-    };
+    const onImageData = function onImageData({ res: images }) {
+        if (!giphyWidget) return;
 
-    const onImageData = function onImageData({ data }) {
-        if (!(giphyWidget && data.giphyResponse)) return;
-
-        if (!data.res.data.length) {
+        if (!images.length) {
             giphyWidget
                 .toggleLoading(false)
                 .toggleMessage(true, 'No Results Found :(');
             return;
         }
-
-        const images = data.res.data.map(image => ({
-            uri: image.images.original.url,
-            name: image.slug
-        }));
 
         bypassCSPForImages(images)
             .then(imgList => {
@@ -51,16 +40,16 @@ onGiphyBtnClick(({ form, button, input }) => {
     };
 
     const onDispose = function onDispose() {
-        window.removeEventListener('message', ImageData);
         giphyWidget = null;
-    }
+        unbindListener();
+    };
 
-    window.addEventListener('message', onImageData);
+    let unbindListener = listenForGiphyResponse(onImageData);
 
     const { top, left } = $(button).offset();
     let giphyWidget = widget.create({
         onSelection,
         onDispose,
-        onTextChange: debounce(onTextChange, 1000)
+        onTextChange: debounce(startSearch, 1000)
     }).appendToDOM().showAt(top + 28, left - 124);
 });

@@ -7,7 +7,12 @@ const apiKey = 'dc6zaTOxFJmzC'; // Public API key
 function giphySearch(searchTerm) {
     const encodedSearch = encodeURIComponent(searchTerm);
     const uri = `${apiBase}/gifs/search?q=${encodedSearch}&api_key=${apiKey}`;
-    return fetch(uri).then(res => res.json());
+    return fetch(uri).then(res => res.json()).then(res => {
+        return res.data.map(image => ({
+            uri: image.images.original.url,
+            name: image.slug
+        }));
+    });
 }
 
 chrome.runtime.onMessage.addListener((data, sender, cb) => {
