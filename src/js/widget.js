@@ -39,6 +39,10 @@ export default {
             this.dispose();
         });
 
+        $(document).on('keyup.giphy', ({ keyCode }) => {
+            if (keyCode === 27) this.dispose();
+        });
+
         return this;
     },
 
@@ -64,6 +68,7 @@ export default {
 
     dispose() {
         $(document).off('click.giphy');
+        $(document).off('keyup.giphy');
         this.$widget.remove();
         this.disposed = true;
         this.onDispose && this.onDispose();
