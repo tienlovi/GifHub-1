@@ -58,6 +58,7 @@ export default {
 
     showAt(top = 0, left = 0) {
         this.$widget.removeClass(hiddenClass).css({ top, left });
+        this.$input.focus();
         return this;
     },
 
