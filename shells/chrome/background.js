@@ -10,6 +10,7 @@ function giphySearch(searchTerm) {
     return fetch(uri).then(res => res.json()).then(res => {
         return res.data.map(image => ({
             uri: image.images.original.url,
+            downsizedUri: image.images.downsized.url,
             name: image.slug
         }));
     });

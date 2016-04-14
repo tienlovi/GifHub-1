@@ -54,7 +54,7 @@ export default {
 
     imageSelected(img) {
         this.onSelection({
-            uri: img.src,
+            uri: img.getAttribute('data-full-uri'),
             name: img.title
         });
         this.dispose();
@@ -87,7 +87,9 @@ export default {
 
     updateImageList(images = []) {
         const imageDOM = images.map(image => {
-            return `<li><img src="${image.uri}" title="${image.name}"</li>`;
+            return `<li>
+                <img src="${image.downsizedUri}" title="${image.name}" data-full-uri="${image.uri}>"
+            </li>`;
         }).join('');
 
         this.$imgList.html(imageDOM);
