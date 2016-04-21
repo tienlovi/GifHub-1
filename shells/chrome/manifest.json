@@ -1,6 +1,6 @@
 {
     "name": "GifHub",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Insert GIFs from Giphy.com into GitHub comments",
     "manifest_version": 2,
     "content_scripts": [{

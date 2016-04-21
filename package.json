@@ -1,6 +1,6 @@
 {
   "name": "octo-preview",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Insert Giphy GIFs in GitHub comments",
   "scripts": {
     "build:chrome": "gulp"
