@@ -25,8 +25,8 @@ function messageIfFound(window) {
     try {
         // Determine if the page is truly a GitHub page. Use their
         // feature detection to detect them :)
-        require('github/feature-detection');
-        window.postMessage({ installGiphy: true }, '*');
+        const isGitHub = !!require('github/feature-detection');
+        if (isGitHub) window.postMessage({ installGiphy: true }, '*');
     } catch(err) {}
 }
 
