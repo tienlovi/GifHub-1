@@ -1,9 +1,12 @@
 {
-  "name": "octo-preview",
+  "name": "GifHub",
   "version": "1.0.7",
   "description": "Insert Giphy GIFs in GitHub comments",
   "scripts": {
-    "build:chrome": "gulp"
+    "build:chrome": "gulp",
+    "clean": "rm -rf dist && mkdir dist",
+    "package": "zip -jr chrome.zip dist/chrome/",
+    "release": "npm-run-all clean build:chrome package webstore upload --file chrome.zip --auto-publish"
   },
   "author": "Andrew Levine",
   "devDependencies": {
@@ -12,10 +15,11 @@
     "babelify": "^7.2.0",
     "brfs": "^1.4.3",
     "browserify": "^11.2.0",
+    "chrome-webstore-upload-cli": "^0.2.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
-    "npm-run-all": "^1.5.3",
+    "npm-run-all": "^1.8.0",
     "require-dir": "^0.3.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
