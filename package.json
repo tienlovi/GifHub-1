@@ -1,12 +1,12 @@
 {
   "name": "GifHub",
-  "version": "1.0.7",
   "description": "Insert Giphy GIFs in GitHub comments",
+  "version": "1.0.8",
   "scripts": {
     "build:chrome": "gulp",
     "clean": "rm -rf dist && mkdir dist",
     "package": "zip -jr chrome.zip dist/chrome/",
-    "release": "npm-run-all clean build:chrome package webstore upload --file chrome.zip --auto-publish"
+    "release": "npm-run-all clean build:chrome package && webstore upload --file chrome.zip --auto-publish"
   },
   "author": "Andrew Levine",
   "devDependencies": {
